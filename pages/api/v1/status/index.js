@@ -8,22 +8,6 @@ router.get(getHandler);
 
 export default router.handler(controller.errorHandlers);
 
-function onNoMatchHandler(request, response) {
-  const publicErrorObject = new MethodNotAllowedError();
-  response.status(publicErrorObject.statusCode).json(publicErrorObject);
-}
-
-function onErrorHandler(error, request, response) {
-  const publicErrorObject = new InternalServerError({
-    cause: error,
-  });
-
-  console.log("\n Erro dentro do catch do next-connect:");
-  console.error(publicErrorObject);
-
-  response.status(500).json(publicErrorObject);
-}
-
 async function getHandler(request, response) {
   const updatedAt = new Date().toISOString();
 
